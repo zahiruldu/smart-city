@@ -13,15 +13,21 @@ exports.home = function(req, res){
 
 
 exports.ping = function(req,res){
-	var newCar = new Car({
-        id: req.body.id,
-        name: req.body.name,
-        lat: req.body.lat,
-        long: req.body.long
-      });
-	newCar.save(function(err, result){
-		res.send(result);
-	});
+	if(!req.body.lat || !req.body.long){
+		res.send('please send longitude and latitude');
+	} else{
+		var newCar = new Car({
+	        id: req.body.id,
+	        name: req.body.name,
+	        lat: req.body.lat,
+	        long: req.body.long
+	      });
+		newCar.save(function(err, result){
+			res.send(result);
+		});
+
+	}
+	
 
 }
 
